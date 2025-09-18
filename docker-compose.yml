@@ -1,8 +1,8 @@
 version: '3.8'
 
 services:
-  app:
-  build: ./php        # 👈 tells Docker to build from php/Dockerfile
+ app:
+  build: ./php
   container_name: lamp-php
   volumes:
     - ./php:/var/www/html
