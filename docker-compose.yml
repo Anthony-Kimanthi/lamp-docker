@@ -2,14 +2,15 @@ version: '3.8'
 
 services:
   app:
-    image: php:7.4-apache
-    container_name: lamp-php
-    volumes:
-      - ./php:/var/www/html
-    ports:
-      - "8083:80"
-    depends_on:
-      - db
+  build: ./php        # 👈 tells Docker to build from php/Dockerfile
+  container_name: lamp-php
+  volumes:
+    - ./php:/var/www/html
+  ports:
+    - "8083:80"
+  depends_on:
+    - db
+
 
   db:
     image: mysql:5.7
