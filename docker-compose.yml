@@ -1,16 +1,13 @@
-version: '3.8'
-
 services:
   app:
-    build: ./php
+    build: ./php                # 👈 uses your custom Dockerfile
     container_name: lamp-php
     volumes:
-      - ./php:/var/www/html
+      - ./php:/var/www/html     # mounts your code into container
     ports:
       - "8083:80"
     depends_on:
       - db
-
 
   db:
     image: mysql:5.7
