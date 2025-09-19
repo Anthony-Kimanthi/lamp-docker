@@ -1,32 +1,34 @@
 <?php
-$servername = "db"; // service name from docker-compose
-$username = "root";
-$password = "rootpassword";
+$servername = "db";
+$username = "testuser";
+$password = "testpass";
 $dbname = "testdb";
 
-// Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch users
-$sql = "SELECT id, name FROM users";
+$sql = "SELECT id, title, created_at FROM posts ORDER BY created_at DESC";
 $result = $conn->query($sql);
-
-echo "<h1>Users in testdb.users</h1>";
-
-if ($result->num_rows > 0) {
+?>
+<!DOCTYPE html>
+<html>
+<head><title>My Blog</title></head>
+<body>
+<h1>My Blog</h1>
+<a href="add.php">Add New Post</a>
+<hr>
+<?php
+if ($result && $result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-        echo $row["id"]." - ".$row["name"]."<br>";
+        echo "<h2><a href='view.php?id=" . $row["id"] . "'>" . htmlspecialchars($row["title"]) . "</a></h2>";
+        echo "<small>Posted on " . $row["created_at"] . "</small><hr>";
     }
 } else {
-    echo "0 results";
+    echo "No posts yet!";
 }
-
 $conn->close();
 ?>
-<br>
-<a href="insert.php">Add a new user</a>
+</body>
+</html>
