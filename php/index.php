@@ -1,26 +1,33 @@
-<?php
-$mysqli = new mysqli("mysql_db", "root", "rootpassword", "blogdb");
-
-if ($mysqli->connect_errno) {
-    die("Failed to connect to MySQL: " . $mysqli->connect_error);
-}
-
-$result = $mysqli->query("SELECT * FROM posts ORDER BY created_at DESC");
-?>
+<?php include 'db.php'; ?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Blog</title>
+    <title>My Docker Blog</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        h1 { color: #444; }
+        .post { margin-bottom: 20px; }
+        .title { font-weight: bold; font-size: 18px; }
+        .content { margin-top: 5px; }
+    </style>
 </head>
 <body>
     <h1>My Blog</h1>
-    <a href="add.php">Add New Post</a>
-    <hr>
-    <?php while ($row = $result->fetch_assoc()): ?>
-        <h2><a href="view.php?id=<?= $row['id'] ?>"><?= htmlspecialchars($row['title']) ?></a></h2>
-        <p><?= substr(htmlspecialchars($row['content']), 0, 200) ?>...</p>
-        <small>Posted on <?= $row['created_at'] ?></small>
-        <hr>
-    <?php endwhile; ?>
+
+    <?php
+    $result = $conn->query("SELECT * FROM posts ORDER BY id DESC");
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo "<div class='post'>";
+            echo "<div class='title'>" . htmlspecialchars($row['title']) . "</div>";
+            echo "<div class='content'>" . htmlspecialchars($row['content']) . "</div>";
+            echo "</div>";
+        }
+    } else {
+        echo "No posts yet!";
+    }
+    ?>
 </body>
 </html>
+
