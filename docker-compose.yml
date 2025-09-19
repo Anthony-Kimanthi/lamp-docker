@@ -1,39 +1,32 @@
 services:
   app:
     build: ./php
-    container_name: php_app
+    container_name: lamp-docker-app
     ports:
       - "8083:80"
     volumes:
       - ./php:/var/www/html
     depends_on:
-      - db
+      - mysql_db
 
-  db:
+  mysql_db:
     image: mysql:5.7
-    container_name: mysql_db
+    container_name: lamp-docker-mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: rootpass
-      MYSQL_DATABASE: testdb
-      MYSQL_USER: testuser
-      MYSQL_PASSWORD: testpass
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: blogdb
     volumes:
-      - mysql_data:/var/lib/mysql
       - ./db:/docker-entrypoint-initdb.d
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
-    depends_on:
-      - db
+    container_name: lamp-docker-phpmyadmin
+    restart: always
     ports:
       - "8081:80"
     environment:
-      PMA_HOST: db
-      PMA_USER: testuser
-      PMA_PASSWORD: testpass
-
-volumes:
-  mysql_data:
-
+      PMA_HOST: mysql_db
+      MYSQL_ROOT_PASSWORD: rootpassword
+    depends_on:
+      - mysql_db
