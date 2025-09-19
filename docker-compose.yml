@@ -9,15 +9,19 @@ services:
     depends_on:
       - mysql_db
 
-  mysql_db:
+  services:
+  db:
     image: mysql:5.7
-    container_name: lamp-docker-mysql
+    container_name: mysql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: blogdb
-    volumes:
-      - ./db:/docker-entrypoint-initdb.d
+      MYSQL_DATABASE: blog
+      MYSQL_USER: bloguser
+      MYSQL_PASSWORD: blogpass
+    ports:
+      - "3306:3306"
+
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
