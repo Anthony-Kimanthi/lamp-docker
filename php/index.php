@@ -13,7 +13,6 @@
 </head>
 <body>
     <h1>My Blog</h1>
-
     <?php
     $result = $conn->query("SELECT * FROM posts ORDER BY id DESC");
 
@@ -30,4 +29,3 @@
     ?>
 </body>
 </html>
-
