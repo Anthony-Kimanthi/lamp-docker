@@ -25,15 +25,14 @@ services:
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin
-    restart: always
+    depends_on:
+      - db
     ports:
       - "8081:80"
     environment:
       PMA_HOST: db
       PMA_USER: testuser
       PMA_PASSWORD: testpass
-    depends_on:
-      - db
 
 volumes:
   mysql_data:
