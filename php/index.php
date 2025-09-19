@@ -1,8 +1,8 @@
 <?php
-$servername = "db";       // service name from docker-compose
+$servername = "db";
 $username = "root";
 $password = "rootpassword";
-$dbname = "testdb";       // the DB you already made in phpMyAdmin
+$dbname = "testdb";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
