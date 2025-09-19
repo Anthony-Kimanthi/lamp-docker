@@ -19,4 +19,22 @@ services:
       MYSQL_USER: testuser
       MYSQL_PASSWORD: testpass
     volumes:
+      - mysql_data:/var/lib/mysql
       - ./db:/docker-entrypoint-initdb.d
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: testuser
+      PMA_PASSWORD: testpass
+    depends_on:
+      - db
+
+volumes:
+  mysql_data:
+
