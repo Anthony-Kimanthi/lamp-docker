@@ -1,10 +1,10 @@
 <?php
-$host = "mysql";       // service name from docker-compose.yml
-$user = "root";        // or whatever user you configured
-$pass = "rootpassword"; // change to your MySQL root password
-$db   = "blog";
+$host = 'db'; // service name in docker-compose
+$user = 'bloguser'; // must match MYSQL_USER
+$pass = 'blogpass'; // must match MYSQL_PASSWORD
+$dbname = 'blog';   // must match MYSQL_DATABASE
 
-$conn = new mysqli($host, $user, $pass, $db);
+$conn = new mysqli($host, $user, $pass, $dbname);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
