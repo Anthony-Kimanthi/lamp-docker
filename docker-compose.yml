@@ -3,7 +3,7 @@ services:
     build: ./php
     container_name: php_app
     ports:
-      - "8080:80"
+      - "8083:80"
     volumes:
       - ./php:/var/www/html
     depends_on:
