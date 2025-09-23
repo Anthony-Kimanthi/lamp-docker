@@ -49,6 +49,10 @@
             echo "<div class='date'>Posted on " . $row['created_at'] . "</div>";
             echo "<div class='actions'>";
             echo "<a href='delete.php?id=" . $row['id'] . "' onclick='return confirm(\"Are you sure you want to delete this post?\");'>Delete</a>";
+            <div class='actions'>
+    <a href='edit.php?id=" . $row['id'] . "'>Edit</a>
+    <a href='delete.php?id=" . $row['id'] . "' onclick='return confirm(\"Are you sure you want to delete this post?\");'>Delete</a>
+</div>
             echo "</div>";
             echo "</div>";
         }
