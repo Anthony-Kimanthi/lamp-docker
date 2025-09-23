@@ -19,6 +19,16 @@
         .title { font-weight: bold; font-size: 18px; }
         .content { margin-top: 5px; }
         .date { font-size: 12px; color: gray; margin-top: 3px; }
+        .actions { margin-top: 8px; }
+        .actions a {
+            font-size: 13px;
+            color: white;
+            background: #dc3545;
+            padding: 5px 10px;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .actions a:hover { background: #c82333; }
     </style>
 </head>
 <body>
@@ -37,6 +47,9 @@
             echo "<div class='title'>" . htmlspecialchars($row['title']) . "</div>";
             echo "<div class='content'>" . nl2br(htmlspecialchars($row['content'])) . "</div>";
             echo "<div class='date'>Posted on " . $row['created_at'] . "</div>";
+            echo "<div class='actions'>";
+            echo "<a href='delete.php?id=" . $row['id'] . "' onclick='return confirm(\"Are you sure you want to delete this post?\");'>Delete</a>";
+            echo "</div>";
             echo "</div>";
         }
     } else {
