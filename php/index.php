@@ -24,7 +24,7 @@
             echo "</div>";
         }
     } else {
-        echo "No posts yet!"
+        echo "No posts yet!";
     }
     ?>
 </body>
