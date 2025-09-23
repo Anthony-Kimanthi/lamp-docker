@@ -1,0 +1,38 @@
+body { font-family: Arial, sans-serif; margin: 40px; }
+h1 { color: #444; }
+
+.topbar { margin-bottom: 20px; }
+.topbar a {
+    background: #28a745;
+    color: white;
+    padding: 8px 12px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+.topbar a:hover { background: #218838; }
+
+.post { margin-bottom: 20px; padding: 10px; border-bottom: 1px solid #ddd; }
+.title { font-weight: bold; font-size: 18px; }
+.content { margin-top: 5px; }
+.date { font-size: 12px; color: gray; margin-top: 3px; }
+
+.actions { margin-top: 8px; }
+.actions a {
+    font-size: 13px;
+    color: white;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-right: 5px;
+}
+.actions a:first-child { background: #007bff; }  /* Edit */
+.actions a:first-child:hover { background: #0056b3; }
+.actions a:last-child { background: #dc3545; }   /* Delete */
+.actions a:last-child:hover { background: #c82333; }
+
+form { max-width: 400px; }
+label { display: block; margin-top: 10px; }
+input[type="text"], textarea {
+    width: 100%; padding: 8px; margin-top: 5px;
+}
+button { margin-top: 15px; padding: 10px 15px; }
