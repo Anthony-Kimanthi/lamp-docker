@@ -16,7 +16,7 @@
 </head>
 <body>
     <h1>Add New Post</h1>
-    <form method="POST" action="save_post.php">
+    <form method="POST" action="save.php">
         <label for="title">Title</label>
         <input type="text" name="title" required>
 
