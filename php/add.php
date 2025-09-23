@@ -1,24 +1,28 @@
-<?php
-$mysqli = new mysqli("mysql_db", "root", "rootpassword", "blogdb");
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $title = $mysqli->real_escape_string($_POST['title']);
-    $content = $mysqli->real_escape_string($_POST['content']);
-    $mysqli->query("INSERT INTO posts (title, content) VALUES ('$title', '$content')");
-    header("Location: index.php");
-    exit;
-}
-?>
+<?php include 'db.php'; ?>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Add Post</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        h1 { color: #444; }
+        form { max-width: 400px; }
+        label { display: block; margin-top: 10px; }
+        input[type="text"], textarea {
+            width: 100%; padding: 8px; margin-top: 5px;
+        }
+        button { margin-top: 15px; padding: 10px 15px; }
+    </style>
 </head>
 <body>
     <h1>Add New Post</h1>
-    <form method="POST">
-        <p>Title: <input type="text" name="title" required></p>
-        <p>Content:<br><textarea name="content" rows="5" cols="40" required></textarea></p>
+    <form method="POST" action="save_post.php">
+        <label for="title">Title</label>
+        <input type="text" name="title" required>
+
+        <label for="content">Content</label>
+        <textarea name="content" rows="5" required></textarea>
+
         <button type="submit">Save</button>
     </form>
     <p><a href="index.php">Back to blog</a></p>
