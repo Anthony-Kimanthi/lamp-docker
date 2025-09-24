@@ -1,7 +1,7 @@
 <?php
 $host = "mysql_db";       // same as in docker-compose service name
-$user = "blogsuser";      // your non-root user
-$pass = "blogspassword";  // the password you set in docker-compose
+$user = "bloguser";      // your non-root user
+$pass = "blogpassword";  // the password you set in docker-compose
 $db   = "blogdb";         // your database name
 
 $conn = new mysqli($host, $user, $pass, $db);
