@@ -1,5 +1,5 @@
 <?php
-$host = "mysql_db";       // same as in docker-compose service name
+$host = "sdb";       // same as in docker-compose service name
 $user = "bloguser";      // your non-root user
 $pass = "blogpass";  // the password you set in docker-compose
 $db   = "blog";         // your database name
