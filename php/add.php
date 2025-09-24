@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>Add Post</title>
+    <link rel="stylesheet" href="style.css">
     <style>
         body { font-family: Arial, sans-serif; margin: 40px; }
         h1 { color: #444; }
