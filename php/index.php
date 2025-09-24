@@ -40,26 +40,24 @@
     </div>
 
     <?php
-    $result = $conn->query("SELECT * FROM posts ORDER BY id DESC");
+$result = $conn->query("SELECT * FROM posts ORDER BY id DESC");
 
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            echo "<div class='post'>";
-            echo "<div class='title'>" . htmlspecialchars($row['title']) . "</div>";
-            echo "<div class='content'>" . nl2br(htmlspecialchars($row['content'])) . "</div>";
-            echo "<div class='date'>Posted on " . $row['created_at'] . "</div>";
-            echo "<div class='actions'>";
-            echo "<a href='delete.php?id=" . $row['id'] . "' onclick='return confirm(\"Are you sure you want to delete this post?\");'>Delete</a>";
-            <div class='actions'>;
-    <a href='edit.php?id=" . $row['id'] . "'>Edit</a>
-    <a href='delete.php?id=" . $row['id'] . "' onclick='return confirm(\"Are you sure you want to delete this post?\");'>Delete</a>
-</div>
-            echo "</div>";
-            echo "</div>";
-        }
-    } else {
-        echo "No posts yet!";
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        echo "<div class='post'>";
+        echo "<div class='title'>" . htmlspecialchars($row['title']) . "</div>";
+        echo "<div class='content'>" . nl2br(htmlspecialchars($row['content'])) . "</div>";
+        echo "<div class='date'>Posted on " . $row['created_at'] . "</div>";
+        echo "<div class='actions'>";
+        echo "<a href='edit.php?id=" . $row['id'] . "'>Edit</a> ";
+        echo "<a href='delete.php?id=" . $row['id'] . "' onclick='return confirm(\"Are you sure you want to delete this post?\");'>Delete</a>";
+        echo "</div>"; // close actions
+        echo "</div>"; // close post
     }
-    ?>
+} else {
+    echo "No posts yet!";
+}
+?>
+
 </body>
 </html>
