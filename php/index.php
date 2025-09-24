@@ -1,8 +1,7 @@
 <?php
 session_start();
+include 'db.php';
 ?>
-
-<?php include 'db.php'; ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,28 +39,42 @@ session_start();
     <h1>My Blog</h1>
 
     <div class="topbar">
-        <a href="add.php">+ Add New Post</a>
+        <?php if (isset($_SESSION['username'])): ?>
+            <span>Welcome, <?= htmlspecialchars($_SESSION['username']) ?>!</span>
+            <a href="logout.php">Logout</a>
+            <?php if ($_SESSION['role'] === 'admin'): ?>
+                <a href="add.php">+ Add New Post</a>
+            <?php endif; ?>
+        <?php else: ?>
+            <a href="login.php">Login</a>
+        <?php endif; ?>
     </div>
 
     <?php
-$result = $conn->query("SELECT * FROM posts ORDER BY id DESC");
+    $result = $conn->query("SELECT * FROM posts ORDER BY id DESC");
 
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        echo "<div class='post'>";
-        echo "<div class='title'>" . htmlspecialchars($row['title']) . "</div>";
-        echo "<div class='content'>" . nl2br(htmlspecialchars($row['content'])) . "</div>";
-        echo "<div class='date'>Posted on " . $row['created_at'] . "</div>";
-        echo "<div class='actions'>";
-        echo "<a href='edit.php?id=" . $row['id'] . "'>Edit</a> ";
-        echo "<a href='delete.php?id=" . $row['id'] . "' onclick='return confirm(\"Are you sure you want to delete this post?\");'>Delete</a>";
-        echo "</div>"; // close actions
-        echo "</div>"; // close post
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo "<div class='post'>";
+            echo "<div class='title'>" . htmlspecialchars($row['title']) . "</div>";
+            echo "<div class='content'>" . nl2br(htmlspecialchars($row['content'])) . "</div>";
+            echo "<div class='date'>Posted on " . $row['created_at'] . "</div>";
+
+            // Show actions only for admins
+            if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
+                echo "<div class='actions'>";
+                echo "<a href='edit.php?id=" . $row['id'] . "'>Edit</a> ";
+                echo "<a href='delete.php?id=" . $row['id'] . "' onclick='return confirm(\"Are you sure you want to delete this post?\");'>Delete</a>";
+                echo "</div>";
+            }
+
+            echo "</div>"; // close post
+        }
+    } else {
+        echo "No posts yet!";
     }
-} else {
-    echo "No posts yet!";
-}
-?>
+    ?>
 
 </body>
 </html>
+
