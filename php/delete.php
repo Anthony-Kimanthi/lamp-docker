@@ -1,4 +1,11 @@
 <?php
+session_start();
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+    die("Access denied: Admins only.");
+}
+?>
+
+<?php
 include 'db.php';
 
 if (isset($_GET['id'])) {
