@@ -36,8 +36,8 @@ include 'db.php';
     </style>
 </head>
 <body>
-    <h1>My Blog</h1>
-
+    <h1>Unlimihub254</h1>
+    <p1>The home of infinite solutions.</p1>
     <div class="topbar">
         <?php if (isset($_SESSION['username'])): ?>
             <span>Welcome, <?= htmlspecialchars($_SESSION['username']) ?>!</span>
